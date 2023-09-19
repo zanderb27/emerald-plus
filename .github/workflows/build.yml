@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: eduardo-host1
+    runs-on: self-hosted
     env:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
