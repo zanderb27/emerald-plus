@@ -29,8 +29,7 @@ jobs:
       - name: Install binutils
         run: |
           sudo apt update -y
-          sudo apt install -y gcc-arm-none-eabi binutils-arm-none-eabi libelf-dev
-          sudo apt-get install -y build-essential
+          sudo apt install -y gcc-arm-none-eabi binutils-arm-none-eabi libelf-dev build-essential libpng-dev
         # build-essential, git, and libpng-dev are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
