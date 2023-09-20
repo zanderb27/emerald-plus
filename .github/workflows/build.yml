@@ -28,8 +28,8 @@ jobs:
 
       - name: Install agbcc
         run: |
-          ./install.sh ../
-        working-directory: agbcc
+          ./install.sh /home/zac/rhh_actions-runner/_work/pokeemerald-expansion/pokeemerald-expansion
+        working-directory: /home/zac/agbcc
 
       - name: Agbcc
         run: make -j${nproc} -O all
