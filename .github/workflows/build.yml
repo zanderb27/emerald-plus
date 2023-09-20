@@ -20,6 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install agbcc
+        run: ./install.sh ../
+        working-directory: agbcc
+
       - name: Agbcc
         run: make -j${nproc} -O all
 
