@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install agbcc
-        run: ./install.sh ../
+        run: ./install.sh ../../
         working-directory: agbcc
 
       - name: Agbcc
