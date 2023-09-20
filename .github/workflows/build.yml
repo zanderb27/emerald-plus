@@ -20,18 +20,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Checkout agbcc
-        uses: actions/checkout@v2
-        with:
-          path: agbcc
-          repository: pret/agbcc
-
-      - name: Install agbcc
-        run: |
-          ./build.sh
-          ./install.sh ../
-        working-directory: agbcc
-
       - name: Agbcc
         run: make -j${nproc} -O all
 
