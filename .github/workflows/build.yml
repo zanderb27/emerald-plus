@@ -20,10 +20,6 @@ jobs:
           primary-runner: "self-hosted"
           fallback-runner: "ubuntu-latest"
 
-  another-job:
-    steps:
-      - name: Do something
-        run: echo "Doing something on ${{ needs.determine-runner.outputs.runner }}"
   build:
     needs: determine-runner
     runs-on: ${{ fromJson(needs.determine-runner.outputs.runner) }}
@@ -40,27 +36,30 @@ jobs:
           path: pokemerald-expansion
 
       - name: Checkout agbcc
-        if: ${{ fromJson(needs.determine-runner.outputs.runner)  == 'ubuntu-latest'}}
+        if: ${{ fromJson(needs.determine-runner.outputs.runner) == 'ubuntu-latest'}}
         uses: actions/checkout@v4
         with:
           path: agbcc
           repository: pret/agbcc
 
       - name: Install binutils
-        if: ${{ fromJson(needs.determine-runner.outputs.runner)  == 'ubuntu-latest'}}
         run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libelf-dev
+        if: ${{ fromJson(needs.determine-runner.outputs.runner) == 'ubuntu-latest'}}
         # build-essential, git, and libpng-dev are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
 
-      - name: Install agbcc
-        if: ${{ fromJson(needs.determine-runner.outputs.runner)  == 'ubuntu-latest'}}
+      - name: Build and install agbcc
         run: |
           ./build.sh
           ./install.sh ../pokeemerald-expansion
-        if: ${{ fromJson(needs.determine-runner.outputs.runner)  == 'self-hosted'}}
+        if: ${{ fromJson(needs.determine-runner.outputs.runner) == 'ubuntu-latest'}}
+        working-directory: agbcc
+        
+      - name: Install agbcc
         run: |
           ./install.sh ../pokeemerald-expansion
+        if: ${{ fromJson(needs.determine-runner.outputs.runner) == 'self-hosted'}}
         working-directory: agbcc
 
       - name: Agbcc
